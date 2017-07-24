@@ -25,5 +25,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)dismissSelf:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
 
 @end

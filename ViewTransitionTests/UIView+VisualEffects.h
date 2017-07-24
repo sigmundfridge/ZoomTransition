@@ -15,8 +15,13 @@ typedef NS_ENUM(NSInteger, CHWUIViewZoomAxis) {
 
 
 @interface UIView (VisualEffects)
-- (void)beginZoomToView:(UIView*)view zoomAxis:(CHWUIViewZoomAxis)zoomAxis completion:(void (^)(BOOL finished))completion;
-- (void)zoomOutToFullScreenCompletion:(void (^)(BOOL finished))completion;
+- (void)beginZoomToView:(UIView*)view zoomAxis:(CHWUIViewZoomAxis)zoomAxis duration:(NSTimeInterval)duration completion:(void (^)(BOOL finished))completion;
+- (void)zoomOutToFullScreenWithDuration:(NSTimeInterval)duration completion:(void (^)(BOOL finished))completion;
+
+-(void)zoomToPoint:(CGPoint)zoomPoint size:(CGSize)zoomAmount zoomAxis:(CHWUIViewZoomAxis)zoomAxis duration:(NSTimeInterval)duration completion:(void (^)(BOOL finished))completion;
+
+
+
 - (void)showZoomCenterPoint;
 - (void)showViewFrame;
 - (void)showAnchor;

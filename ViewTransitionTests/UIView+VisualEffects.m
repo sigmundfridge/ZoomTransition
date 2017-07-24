@@ -18,7 +18,7 @@
 }
 
 
-- (void)beginZoomToView:(UIView*)view zoomAxis:(CHWUIViewZoomAxis)zoomAxis completion:(void (^)(BOOL finished))completion {
+- (void)beginZoomToView:(UIView*)view zoomAxis:(CHWUIViewZoomAxis)zoomAxis duration:(NSTimeInterval)duration completion:(void (^)(BOOL finished))completion {
     CGFloat dX = self.frame.size.width / view.frame.size.width;
     CGFloat dY = self.frame.size.height / view.frame.size.height;
 
@@ -36,7 +36,7 @@
     CGPoint centerAnchor = CGPointMake(viewCenter.x / self.frame.size.width, viewCenter.y / self.frame.size.height);
     [self setAnchorPoint:centerAnchor];
     
-    [UIView animateWithDuration:2.5 delay:0 options:0 animations:^{
+    [UIView animateWithDuration:duration delay:0 options:0 animations:^{
         self.transform = tr;
         self.layer.position = self.superview.center;
     } completion:^(BOOL finished) {
@@ -44,13 +44,42 @@
     }];
 }
 
-- (void)zoomOutToFullScreenCompletion:(void (^)(BOOL finished))completion {
+-(void)zoomToPoint:(CGPoint)zoomPoint size:(CGSize)zoomAmount zoomAxis:(CHWUIViewZoomAxis)zoomAxis duration:(NSTimeInterval)duration completion:(void (^)(BOOL finished))completion {
+    
+    CGFloat dX = self.frame.size.width / zoomAmount.width;
+    CGFloat dY = self.frame.size.height / zoomAmount.height;
+    
+    switch (zoomAxis) {
+        case CHWUIViewZoomXAxis:
+            dY = dX;
+            break;
+        case CHWUIViewZoomYAxis:
+            dX = dY;
+        default:
+            break;
+    }
+    CGAffineTransform tr = CGAffineTransformScale(self.transform, dX, dY);
+    CGPoint centerAnchor = CGPointMake(zoomPoint.x / self.frame.size.width, zoomPoint.y / self.frame.size.height);
+    [self setAnchorPoint:centerAnchor];
+    
+    [UIView animateWithDuration:duration delay:0 options:0 animations:^{
+        self.transform = tr;
+        self.layer.position = self.superview.center;
+    } completion:^(BOOL finished) {
+        completion(finished);
+    }];
+
+    
+    
+}
+
+- (void)zoomOutToFullScreenWithDuration:(NSTimeInterval)duration completion:(void (^)(BOOL finished))completion {
     CGFloat dX =  self.superview.frame.size.width / self.frame.size.width;
     CGFloat dY =  self.superview.frame.size.height / self.frame.size.height;
     
     CGAffineTransform tr = CGAffineTransformScale(self.transform, dX, dY);
     [self setAnchorPoint:CGPointMake(0.5, 0.5)];
-    [UIView animateWithDuration:2.5 delay:0 options:0 animations:^{
+    [UIView animateWithDuration:duration delay:0 options:0 animations:^{
         self.transform = tr;
         self.layer.position = self.superview.center;
     } completion:^(BOOL finished) {

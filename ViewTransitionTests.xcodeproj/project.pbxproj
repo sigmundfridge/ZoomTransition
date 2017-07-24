@@ -15,6 +15,7 @@
 		3E51FF971F2228CA00B59A5B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E51FF951F2228CA00B59A5B /* LaunchScreen.storyboard */; };
 		3E51FFA01F22297300B59A5B /* InternalViewTransitionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E51FF9F1F22297300B59A5B /* InternalViewTransitionViewController.m */; };
 		3E51FFA31F2229FE00B59A5B /* UIView+VisualEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E51FFA21F2229FE00B59A5B /* UIView+VisualEffects.m */; };
+		3E51FFA61F25F6E800B59A5B /* CHWZoomTransitionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E51FFA51F25F6E800B59A5B /* CHWZoomTransitionAnimator.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,8 @@
 		3E51FF9F1F22297300B59A5B /* InternalViewTransitionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InternalViewTransitionViewController.m; sourceTree = "<group>"; };
 		3E51FFA11F2229FE00B59A5B /* UIView+VisualEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+VisualEffects.h"; sourceTree = "<group>"; };
 		3E51FFA21F2229FE00B59A5B /* UIView+VisualEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+VisualEffects.m"; sourceTree = "<group>"; };
+		3E51FFA41F25F6E800B59A5B /* CHWZoomTransitionAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHWZoomTransitionAnimator.h; sourceTree = "<group>"; };
+		3E51FFA51F25F6E800B59A5B /* CHWZoomTransitionAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHWZoomTransitionAnimator.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +71,8 @@
 				3E51FF8B1F2228CA00B59A5B /* AppDelegate.m */,
 				3E51FF9E1F22297300B59A5B /* InternalViewTransitionViewController.h */,
 				3E51FF9F1F22297300B59A5B /* InternalViewTransitionViewController.m */,
+				3E51FFA41F25F6E800B59A5B /* CHWZoomTransitionAnimator.h */,
+				3E51FFA51F25F6E800B59A5B /* CHWZoomTransitionAnimator.m */,
 				3E51FF8D1F2228CA00B59A5B /* ViewController.h */,
 				3E51FF8E1F2228CA00B59A5B /* ViewController.m */,
 				3E51FF901F2228CA00B59A5B /* Main.storyboard */,
@@ -166,6 +171,7 @@
 				3E51FF8C1F2228CA00B59A5B /* AppDelegate.m in Sources */,
 				3E51FF891F2228CA00B59A5B /* main.m in Sources */,
 				3E51FFA01F22297300B59A5B /* InternalViewTransitionViewController.m in Sources */,
+				3E51FFA61F25F6E800B59A5B /* CHWZoomTransitionAnimator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

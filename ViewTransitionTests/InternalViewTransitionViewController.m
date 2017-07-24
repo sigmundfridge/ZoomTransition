@@ -8,8 +8,9 @@
 
 #import "InternalViewTransitionViewController.h"
 #import "UIView+VisualEffects.h"
+#import "CHWZoomTransitionAnimator.h"
 
-@interface InternalViewTransitionViewController () <UIViewControllerTransitioningDelegate, UINavigationControllerDelegate>
+@interface InternalViewTransitionViewController () <UIViewControllerTransitioningDelegate, UINavigationControllerDelegate, ZoomTransitionDelegate>
 
 @end
 
@@ -24,6 +25,8 @@
     [self.zoomAreaView showAnchor];
     [self.zoomAreaSibling showViewFrame];
 //    [self.zoomAreaSibling showZoomCenterPoint];
+    self.transitioningDelegate = self;
+    self.navigationController.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -41,25 +44,40 @@
 }
 */
 
+-(CGPoint)zoomToPoint {
+    return [self.view.superview convertPoint:self.zoomToView.center toView:self.view];
+}
+
+-(CGSize)zoomToSize {
+    return self.zoomToView.frame.size;
+}
+
+-(CGPoint)zoomFromPoint {
+    return [self zoomToPoint];
+}
+
+-(CGSize)zoomFromSize {
+    return [self zoomToSize];
+}
+
+
 - (IBAction)zoomInPressed:(id)sender {
-    [self.zoomAreaView beginZoomToView:_zoomToView zoomAxis:(CHWUIViewZoomYAxis) completion:^(BOOL finished) {
-        
+    [self.zoomAreaView zoomToPoint:[self zoomToPoint] size:[self zoomToSize] zoomAxis:CHWUIViewZoomYAxis duration:2.0 completion:^(BOOL finished) {
     }];
 }
 
 - (IBAction)zoomOutPressed:(id)sender {
-    [self.zoomAreaView zoomOutToFullScreenCompletion:^(BOOL finished) {
+    [self.zoomAreaView zoomOutToFullScreenWithDuration:2.0 completion:^(BOOL finished) {
     }];
-
 }
 
 
 - (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
-    return [self transitionForType:self.transitionType presenting:YES];
+    return [[CHWZoomTransitionAnimator alloc] initWithPresenting:YES zoomPoint:[self zoomToPoint] zoomSize:[self zoomToSize]];
 }
 
 - (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
-    return [self transitionForType:self.transitionType presenting:NO];
+    return [[CHWZoomTransitionAnimator alloc] initWithPresenting:NO zoomPoint:[self zoomToPoint] zoomSize:[self zoomToSize]];
 }
 
 - (id<UIViewControllerAnimatedTransitioning>)
@@ -69,16 +87,19 @@ fromViewController:(UIViewController*)fromVC
 toViewController:(UIViewController*)toVC
 {
     if (operation == UINavigationControllerOperationPush) {
-        return [self transitionForType:self.transitionType presenting:YES];
+        return [[CHWZoomTransitionAnimator alloc] initWithPresenting:YES zoomPoint:[self zoomToPoint] zoomSize:[self zoomToSize]];
     }
     else if (operation == UINavigationControllerOperationPop) {
-        return [self transitionForType:self.transitionType presenting:NO];
+        return [[CHWZoomTransitionAnimator alloc] initWithPresenting:NO zoomPoint:[self zoomToPoint] zoomSize:[self zoomToSize]];
     }
     return nil;
 }
 
--(void)setTransition:(CHWTransitionType)transition {
-    self.transitionType = transition;
+- (IBAction)modalTransition:(id)sender {
+    [self performSegueWithIdentifier:@"modal" sender:self];
+}
+- (IBAction)navTransition:(id)sender {
+    [self performSegueWithIdentifier:@"nav" sender:self];
 }
 
 @end

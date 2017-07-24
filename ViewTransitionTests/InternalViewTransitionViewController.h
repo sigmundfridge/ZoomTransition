@@ -7,6 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol ZoomTransitionDelegate
+-(CGPoint)zoomToPoint;
+-(CGSize)zoomToSize;
+@optional
+-(CGPoint)zoomFromPoint;
+-(CGSize)zoomFromSize;
+@end
 
 @interface InternalViewTransitionViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIView *zoomToView;
