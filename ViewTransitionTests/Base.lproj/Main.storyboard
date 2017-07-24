@@ -27,10 +27,10 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cdm-Y5-LqL">
-                                        <rect key="frame" x="19" y="64.5" width="150" height="194.5"/>
+                                        <rect key="frame" x="56" y="97" width="75.5" height="129.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ZOOM TO" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cbf-jd-c7O">
-                                                <rect key="frame" x="36" y="86.5" width="78" height="21"/>
+                                                <rect key="frame" x="-1" y="55" width="77.5" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -42,20 +42,20 @@
                                             <constraint firstItem="cbf-jd-c7O" firstAttribute="centerY" secondItem="Cdm-Y5-LqL" secondAttribute="centerY" id="RJ3-H2-Wsc"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Lp-Z5-Of7">
-                                        <rect key="frame" x="112" y="226" width="150" height="194.5"/>
+                                    <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Lp-Z5-Of7">
+                                        <rect key="frame" x="149.5" y="258.5" width="75" height="129.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="4Lp-Z5-Of7" firstAttribute="width" secondItem="Cdm-Y5-LqL" secondAttribute="width" id="0YZ-8I-gZs"/>
-                                    <constraint firstItem="Cdm-Y5-LqL" firstAttribute="width" secondItem="KXL-c4-iFF" secondAttribute="width" multiplier="0.4" id="1hM-od-agv"/>
+                                    <constraint firstItem="Cdm-Y5-LqL" firstAttribute="width" secondItem="KXL-c4-iFF" secondAttribute="width" multiplier="0.2" id="1hM-od-agv"/>
                                     <constraint firstItem="4Lp-Z5-Of7" firstAttribute="centerY" secondItem="KXL-c4-iFF" secondAttribute="centerY" id="LIe-1t-Piq"/>
                                     <constraint firstItem="Cdm-Y5-LqL" firstAttribute="centerY" secondItem="KXL-c4-iFF" secondAttribute="centerY" multiplier="0.5" id="Raq-7O-40B"/>
                                     <constraint firstItem="4Lp-Z5-Of7" firstAttribute="centerX" secondItem="KXL-c4-iFF" secondAttribute="centerX" id="dHI-s4-SBt"/>
                                     <constraint firstItem="Cdm-Y5-LqL" firstAttribute="centerX" secondItem="KXL-c4-iFF" secondAttribute="centerX" multiplier="0.5" id="njJ-LA-BZs"/>
-                                    <constraint firstItem="Cdm-Y5-LqL" firstAttribute="height" secondItem="KXL-c4-iFF" secondAttribute="height" multiplier="0.3" id="pmk-Kd-RNn"/>
+                                    <constraint firstItem="Cdm-Y5-LqL" firstAttribute="height" secondItem="KXL-c4-iFF" secondAttribute="height" multiplier="0.2" id="pmk-Kd-RNn"/>
                                     <constraint firstItem="4Lp-Z5-Of7" firstAttribute="height" secondItem="Cdm-Y5-LqL" secondAttribute="height" id="yPz-JW-hEM"/>
                                 </constraints>
                             </view>

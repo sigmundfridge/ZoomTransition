@@ -10,12 +10,19 @@
 
 @implementation UIView (VisualEffects)
 
+- (void)showAnchor {
+    CGSize pointSize = CGSizeMake(8, 8);
+        UIView *center = [[UIView alloc] initWithFrame:CGRectMake(self.frame.size.width * self.layer.anchorPoint.x- pointSize.width/2.0, self.frame.size.height * self.layer.anchorPoint.y - pointSize.height/2.0, 10.0, 10.0)];
+        center.backgroundColor = [UIColor greenColor];
+        [self addSubview:center];
+}
+
+
 - (void)beginZoomToView:(UIView*)view zoomAxis:(CHWUIViewZoomAxis)zoomAxis completion:(void (^)(BOOL finished))completion {
     CGFloat dX = self.frame.size.width / view.frame.size.width;
     CGFloat dY = self.frame.size.height / view.frame.size.height;
 
-    CGPoint viewCenter = [self convertPoint:view.center toView:self];
-    
+    CGPoint viewCenter = [self.superview convertPoint:view.center toView:self];
     switch (zoomAxis) {
         case CHWUIViewZoomXAxis:
             dY = dX;
@@ -25,57 +32,29 @@
         default:
             break;
     }
-    
     CGAffineTransform tr = CGAffineTransformScale(self.transform, dX, dY);
-    
     CGPoint centerAnchor = CGPointMake(viewCenter.x / self.frame.size.width, viewCenter.y / self.frame.size.height);
     [self setAnchorPoint:centerAnchor];
-                                       
-    NSLog(@"*** ZOOM IN ********************************************");
-    NSLog(@"PARENT : %@", self);
-    NSLog(@"ZOOM : %@", view);
-    NSLog(@"dX dY : %f %f", dX, dY);
-
+    
     [UIView animateWithDuration:2.5 delay:0 options:0 animations:^{
         self.transform = tr;
+        self.layer.position = self.superview.center;
     } completion:^(BOOL finished) {
-        NSLog(@"*** ZOOM IN COMPLETE ********************************************");
-        NSLog(@"PARENT : %@", self);
-        NSLog(@"ZOOM : %@", view);
-        NSLog(@"dX dY : %f %f", dX, dY);
-       completion(finished);
+        completion(finished);
     }];
 }
 
-- (void)zoomOutToFullScreenFromView:(UIView*)view zoomAxis:(CHWUIViewZoomAxis)zoomAxis completion:(void (^)(BOOL finished))completion {
+- (void)zoomOutToFullScreenCompletion:(void (^)(BOOL finished))completion {
     CGFloat dX =  self.superview.frame.size.width / self.frame.size.width;
     CGFloat dY =  self.superview.frame.size.height / self.frame.size.height;
     
-    CGPoint viewCenter = [self convertPoint:view.center toView:self];
-    
-    switch (zoomAxis) {
-        case CHWUIViewZoomXAxis:
-            dY = dX;
-            break;
-        case CHWUIViewZoomYAxis:
-            dX = dY;
-        default:
-            break;
-    }
-    
     CGAffineTransform tr = CGAffineTransformScale(self.transform, dX, dY);
-    
-    CGPoint centerAnchor = CGPointMake(viewCenter.x / self.frame.size.width, viewCenter.y / self.frame.size.height);
-    [self setAnchorPoint:centerAnchor];
-
+    [self setAnchorPoint:CGPointMake(0.5, 0.5)];
     [UIView animateWithDuration:2.5 delay:0 options:0 animations:^{
         self.transform = tr;
+        self.layer.position = self.superview.center;
     } completion:^(BOOL finished) {
         completion(finished);
-        NSLog(@"*** ZOOM OUT COMPLETE ********************************************");
-        NSLog(@"PARENT : %@", self);
-        NSLog(@"ZOOM : %@", view);
-        NSLog(@"dX dY : %f %f", dX, dY);
     }];
     
 }
@@ -188,6 +167,10 @@
     theAnimation.autoreverses=bothDirections;
     theAnimation.toValue=[NSNumber numberWithFloat:pixelDisplacement];
     [self.layer addAnimation:theAnimation forKey:@"animateXTranslation"];
+}
+
+-(void)rotateView {    
+
 }
 
 @end

@@ -9,7 +9,7 @@
 #import "InternalViewTransitionViewController.h"
 #import "UIView+VisualEffects.h"
 
-@interface InternalViewTransitionViewController ()
+@interface InternalViewTransitionViewController () <UIViewControllerTransitioningDelegate, UINavigationControllerDelegate>
 
 @end
 
@@ -19,11 +19,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.zoomToView showViewFrame];
-    [self.zoomToView showZoomCenterPoint];
+//    [self.zoomToView showZoomCenterPoint];
     [self.zoomAreaView showViewFrame];
-    [self.zoomAreaView showZoomCenterPoint];
+    [self.zoomAreaView showAnchor];
     [self.zoomAreaSibling showViewFrame];
-    [self.zoomAreaSibling showZoomCenterPoint];
+//    [self.zoomAreaSibling showZoomCenterPoint];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -42,15 +42,43 @@
 */
 
 - (IBAction)zoomInPressed:(id)sender {
-    [self.zoomAreaView beginZoomToView:_zoomToView zoomAxis:(CHWUIViewZoomBothAxis) completion:^(BOOL finished) {
+    [self.zoomAreaView beginZoomToView:_zoomToView zoomAxis:(CHWUIViewZoomYAxis) completion:^(BOOL finished) {
         
     }];
 }
 
 - (IBAction)zoomOutPressed:(id)sender {
-    [self.zoomAreaView zoomOutToFullScreenFromView:_zoomToView zoomAxis:CHWUIViewZoomBothAxis completion:^(BOOL finished) {
+    [self.zoomAreaView zoomOutToFullScreenCompletion:^(BOOL finished) {
     }];
 
+}
+
+
+- (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
+    return [self transitionForType:self.transitionType presenting:YES];
+}
+
+- (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+    return [self transitionForType:self.transitionType presenting:NO];
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)
+navigationController:(UINavigationController *)navigationController
+animationControllerForOperation:(UINavigationControllerOperation)operation
+fromViewController:(UIViewController*)fromVC
+toViewController:(UIViewController*)toVC
+{
+    if (operation == UINavigationControllerOperationPush) {
+        return [self transitionForType:self.transitionType presenting:YES];
+    }
+    else if (operation == UINavigationControllerOperationPop) {
+        return [self transitionForType:self.transitionType presenting:NO];
+    }
+    return nil;
+}
+
+-(void)setTransition:(CHWTransitionType)transition {
+    self.transitionType = transition;
 }
 
 @end

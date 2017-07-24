@@ -16,9 +16,10 @@ typedef NS_ENUM(NSInteger, CHWUIViewZoomAxis) {
 
 @interface UIView (VisualEffects)
 - (void)beginZoomToView:(UIView*)view zoomAxis:(CHWUIViewZoomAxis)zoomAxis completion:(void (^)(BOOL finished))completion;
-- (void)zoomOutToFullScreenFromView:(UIView*)view zoomAxis:(CHWUIViewZoomAxis)zoomAxis completion:(void (^)(BOOL finished))completion;
+- (void)zoomOutToFullScreenCompletion:(void (^)(BOOL finished))completion;
 - (void)showZoomCenterPoint;
 - (void)showViewFrame;
+- (void)showAnchor;
 
 - (void)horizontalTranslation:(float)pixelDisplacement duration:(NSTimeInterval)duration bothDirections:(BOOL)bothDirections times:(NSInteger)numberOfCycles;
 
@@ -29,4 +30,6 @@ typedef NS_ENUM(NSInteger, CHWUIViewZoomAxis) {
 
 - (void)mutablePulseViewWithMinIntensity:(float)minIntensity maxIntensity:(float)maxIntensity duration:(float)duration times:(NSInteger)numberOfPulses;
 
+
+-(void)rotateView;
 @end
